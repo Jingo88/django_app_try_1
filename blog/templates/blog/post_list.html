@@ -1,25 +1,12 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Ello WARLD</title>
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="{% static "css/blog.css" %}">
-</head>
-<body>
-	<h1>Ello Warld</h1>
-	<section>
-		{% for post in posts %}
+{% extends "blog/base.html" %}
 
-		<div>
-			<p>Published: {{post.published_date}}</p>
-			<p>Title: {{post.title}}</p>
-			<p>Author: {{post.author}}</p>
-			<p>Text: {{post.text|linebreaks}}</p>
-		</div>
-		{% endfor %}
-	</section>
-</body>
-</html>
+{% block content %}
+	{% for post in posts %}
+
+	<div>
+		<p>Published: {{post.published_date}}</p>
+		<h1><a href="{% url "post_detail" pk=post.pk %}"> {{ post.title }}</a></h1>
+		<p>Author: {{post.author}}</p>
+	</div>
+	{% endfor %}
+{% endblock %}
